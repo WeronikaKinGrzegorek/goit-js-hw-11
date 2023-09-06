@@ -1,6 +1,5 @@
 import { searchImages } from './img-api';
 import Notiflix from 'notiflix';
-// import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import 'notiflix/dist/notiflix-3.2.6.min.css';
 
 const searchForm = document.querySelector('#search-form');
