@@ -1,6 +1,6 @@
 import { searchImages } from './img-api';
-
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import Notiflix from 'notiflix';
+// import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import 'notiflix/dist/notiflix-3.2.6.min.css';
 
 const searchForm = document.querySelector('#search-form');
@@ -10,5 +10,5 @@ const gallery = document.querySelector('.gallery');
 searchForm.addEventListener('click', e => {
   const userInput = e.target.value;
 
-  searchImages(userInput);
+  return searchImages(userInput);
 });
