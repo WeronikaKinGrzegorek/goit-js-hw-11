@@ -1,20 +1,18 @@
 import axios from 'axios';
 const MY_API_KEY = '39280445-58c32c87f381aecf2e93abbca';
-axios.defaults.headers.common['x-api-key'] = MY_API_KEY;
-const BASE_API_URL = `https://pixabay.com/api/${MY_API_KEY}`;
+const BASE_API_URL = `https://pixabay.com/api/?key=${MY_API_KEY}`;
 
-export function searchImages(userInput) {
+export async function searchImages(userInput) {
   const urlEncodedUserInput = userInput.split(' ').join('+');
-  return axios
-    .get(
-      `${BASE_API_URL}&q=${urlEncodedUserInput}&image_type=photo&orientation=horizontal&safesearch=true`
-    )
-    .then(response => {
-      return response.data;
-    })
-    .catch(error => {
-      errorInAxios(error);
-    });
+  try {
+    const response = await axios.get(
+      `${BASE_API_URL}&q=${urlEncodedUserInput}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40`
+    );
+    console.log('search result from API:', response.data);
+    return response.data;
+  } catch (error) {
+    errorInAxios(error);
+  }
 }
 
 function errorInAxios(error) {
