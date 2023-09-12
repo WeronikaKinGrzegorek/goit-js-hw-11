@@ -5,6 +5,7 @@ import 'notiflix/dist/notiflix-3.2.6.min.css';
 
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import { smoothScroll } from './smoothScroll';
 
 const searchForm = document.querySelector('#search-form');
 const input = document.querySelector('#search-form input');
@@ -17,8 +18,12 @@ loadMoreButton.classList.add('is-hidden');
 
 searchForm.addEventListener('submit', async e => {
   e.preventDefault();
+  await drawGallery();
+});
+
+async function drawGallery() {
   try {
-    const searchResult = await searchImages(input.value);
+    const searchResult = await searchImages(input.value, currentPage);
 
     if (searchResult.hits.length === 0) {
       Notiflix.Notify.failure(
@@ -37,6 +42,7 @@ searchForm.addEventListener('submit', async e => {
           fontSize: '15px',
         }
       );
+
       let galleryOfSearchResults = '';
       searchResult.hits.forEach(hit => {
         galleryOfSearchResults += `<div class="photo-card">
@@ -57,27 +63,34 @@ searchForm.addEventListener('submit', async e => {
         </div>
       </div>`;
       });
-      gallery.innerHTML = galleryOfSearchResults;
+      gallery.innerHTML += galleryOfSearchResults;
+
       new SimpleLightbox('.gallery a', {
         captionsData: 'alt',
         captionDelay: 250,
       });
-      currentPage = 1;
-      loadMoreButton.classList.remove('is-hidden');
+
+      setTimeout(() => {
+        smoothScroll();
+      }, 0);
+
+      currentPage++;
+      const lastPage = Math.ceil(searchResult.totalHits / 40);
+
+      if (currentPage === lastPage) {
+        loadMoreButton.classList.remove('is-hidden');
+        Notiflix.Notify.failure(
+          "We're sorry, but you've reached the end of search results.",
+          {
+            timeout: 3000,
+            fontSize: '15px',
+          }
+        );
+      }
     }
   } catch (error) {
     console.error(error);
   }
-});
+}
 
-// loadMoreButton.addEventListener('click', loadMore);
-
-// async function loadMore() {
-//   const searchResult = await searchImages(input.value);
-//   currentPage++;
-//   try {
-
-//   }
-// }
-
-loadMoreButton.classList.add('is-hidden');
+loadMoreButton.addEventListener('click', drawGallery);
