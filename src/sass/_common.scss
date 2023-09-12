@@ -7,10 +7,16 @@
 
 .load-more {
   display: block;
-  background-color: #1190d0;
+  background-color: rgb(73, 35, 197);
   border-radius: 10px;
   padding: 15px 40px;
   margin: 0 auto;
+  border: none;
+  color: #fff;
+}
+
+.load-more:hover {
+  background-color: green;
 }
 
 .is-hidden {
@@ -26,12 +32,11 @@ body {
 }
 
 .search-form {
-  background-color: rgb(30, 41, 158);
+  background-color: rgb(73, 35, 197);
   padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
 }
 
 .search-form input {
@@ -40,14 +45,16 @@ body {
   font-size: 16px;
   height: 30px;
   border: none;
-  border-radius: 5px;
 }
 
 .search-button {
   width: 30px;
   height: 30px;
   border: none;
-  border-radius: 5px;
+}
+
+.search-button:hover {
+  background-color: #fff;
 }
 
 .gallery {
@@ -60,7 +67,8 @@ body {
   align-items: stretch;
 }
 .photo-card {
-  width: 400px;
+  width: 450px;
+  height: 380px;
   background-color: white;
   box-shadow: 5px 5px 10px lightgrey;
   border-radius: 5px;
@@ -69,7 +77,8 @@ body {
 .img {
   border-radius: 5px 5px 0 0;
   display: block;
-  height: auto;
+  height: 100%;
+  max-height: 300px;
   width: 100%;
   object-fit: cover;
 }
@@ -77,9 +86,9 @@ body {
 .info {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   gap: 15px;
-  padding: 10px;
+  padding: 15px;
 }
 
 .info-item {

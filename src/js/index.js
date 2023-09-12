@@ -12,9 +12,9 @@ const input = document.querySelector('#search-form input');
 const gallery = document.querySelector('.gallery');
 const loadMoreButton = document.querySelector('.load-more');
 
-loadMoreButton.classList.add('is-hidden');
+// loadMoreButton.classList.add('is-hidden');
 
-let currentPage = 1;
+let currentPage = 0;
 
 searchForm.addEventListener('submit', async e => {
   e.preventDefault();
@@ -24,6 +24,7 @@ searchForm.addEventListener('submit', async e => {
 
 async function drawGallery() {
   try {
+    currentPage += 1;
     const searchResult = await searchImages(input.value, currentPage);
 
     if (searchResult.hits.length === 0) {
@@ -69,13 +70,12 @@ async function drawGallery() {
       new SimpleLightbox('.gallery a', {
         captionsData: 'alt',
         captionDelay: 250,
-      });
+      }).refresh();
 
       setTimeout(() => {
         smoothScroll();
       }, 0);
 
-      currentPage++;
       const lastPage = Math.ceil(searchResult.totalHits / 40);
 
       if (currentPage === lastPage) {
@@ -88,6 +88,8 @@ async function drawGallery() {
           }
         );
         return;
+      } else {
+        loadMoreButton.classList.remove('is-hidden');
       }
     }
   } catch (error) {
