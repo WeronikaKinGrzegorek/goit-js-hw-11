@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page title</title>
+    <title>Photo search</title>
     <link rel="stylesheet" href="./sass/index.scss" />
   </head>
   <body>
@@ -14,12 +14,13 @@
         autocomplete="off"
         placeholder="Search images..."
       />
-      <button class="search-button" type="submit">Search</button>
+      <button class="search-button" type="submit">
+        <svg class="icons" width="18px" height="18px">
+          <use href="./images/icons.svg#icon-search"></use>
+        </svg>
+      </button>
     </form>
-    <div class="gallery">
-      <!-- Obraz karty -->
-    </div>
-
+    <div class="gallery"></div>
     <button type="button" class="load-more">Load more</button>
     <script type="module" src="./js/index.js"></script>
   </body>

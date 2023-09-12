@@ -6,7 +6,7 @@ export async function searchImages(userInput) {
   const urlEncodedUserInput = userInput.split(' ').join('+');
   try {
     const response = await axios.get(
-      `${BASE_API_URL}&q=${urlEncodedUserInput}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40`
+      `${BASE_API_URL}&q=${urlEncodedUserInput}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40$page=currentPage`
     );
     console.log('search result from API:', response.data);
     return response.data;
