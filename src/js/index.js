@@ -12,12 +12,13 @@ const input = document.querySelector('#search-form input');
 const gallery = document.querySelector('.gallery');
 const loadMoreButton = document.querySelector('.load-more');
 
-let currentPage = 1;
-
 loadMoreButton.classList.add('is-hidden');
+
+let currentPage = 1;
 
 searchForm.addEventListener('submit', async e => {
   e.preventDefault();
+  gallery.innerHTML = '';
   await drawGallery();
 });
 
@@ -73,12 +74,12 @@ async function drawGallery() {
       setTimeout(() => {
         smoothScroll();
       }, 0);
-
+      loadMoreButton.classList.remove('is-hidden');
       currentPage++;
       const lastPage = Math.ceil(searchResult.totalHits / 40);
 
       if (currentPage === lastPage) {
-        loadMoreButton.classList.remove('is-hidden');
+        loadMoreButton.classList.add('is-hidden');
         Notiflix.Notify.failure(
           "We're sorry, but you've reached the end of search results.",
           {
