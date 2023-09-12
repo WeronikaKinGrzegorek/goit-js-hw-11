@@ -74,7 +74,7 @@ async function drawGallery() {
       setTimeout(() => {
         smoothScroll();
       }, 0);
-      loadMoreButton.classList.remove('is-hidden');
+
       currentPage++;
       const lastPage = Math.ceil(searchResult.totalHits / 40);
 
@@ -87,6 +87,7 @@ async function drawGallery() {
             fontSize: '15px',
           }
         );
+        return;
       }
     }
   } catch (error) {
